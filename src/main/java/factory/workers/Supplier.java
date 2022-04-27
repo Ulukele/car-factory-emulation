@@ -2,20 +2,24 @@ package factory.workers;
 
 import factory.ItemsFactory;
 import factory.items.Item;
+import factory.storages.IStorage;
 
-public class Supplier<T extends Item> {
-    private int productionSpeed;
-    private ItemsFactory<T> factory;
+public class Supplier<T extends Item> implements Runnable {
+    private final ItemsFactory<T> factory;
+    private final IStorage<T> storage;
 
-    public Supplier(int productionSpeed) {
-        this.productionSpeed = productionSpeed;
+    public Supplier(int productionSpeed, ItemsFactory<T> factory, IStorage<T> storage) {
+        this.factory = factory;
+        this.storage = storage;
     }
 
-    public int getProductionSpeed() {
-        return productionSpeed;
+    private void produceAndStore() {
+        T item = factory.create();
+        storage.storeItem(item);
     }
 
-    public void setProductionSpeed(int productionSpeed) {
-        this.productionSpeed = productionSpeed;
+    @Override
+    public void run() {
+
     }
 }

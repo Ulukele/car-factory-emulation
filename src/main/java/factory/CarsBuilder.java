@@ -11,7 +11,7 @@ public class CarsBuilder extends IdentifiersCounter {
         assignIndexManager(indexManager);
     }
 
-    Car buildCar(Accessory accessory, Body body, Motor motor) {
+    public Car buildCar(Accessory accessory, Body body, Motor motor) {
         return new Car(accessory, body, motor, getNewIdentifier());
     }
 

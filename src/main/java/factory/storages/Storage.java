@@ -1,34 +1,49 @@
 package factory.storages;
 
-import factory.exceptions.StorageOverflowException;
 
+import java.util.ArrayDeque;
 import java.util.Queue;
-import java.util.concurrent.SynchronousQueue;
+import java.util.logging.Logger;
 
 public class Storage<T> implements IStorage<T> {
 
     private final Queue<T> itemsQueue;
     private final int capacity;
 
+    private final Logger logger = Logger.getLogger(Storage.class.getName());
+
     public Storage(int capacity) {
-        itemsQueue = new SynchronousQueue<>();
+        itemsQueue = new ArrayDeque<>();
         this.capacity = capacity;
     }
 
     @Override
-    public T getItem() {
-        return itemsQueue.remove();
+    synchronized public T getItem() {
+        T item = itemsQueue.remove();
+        notify();
+        return item;
     }
 
     @Override
-    public void storeItem(T item) throws StorageOverflowException {
-        if (itemsQueue.size() == capacity) throw new StorageOverflowException();
+    synchronized public void storeItem(T item) {
+        if (isFull()) {
+            try {
+                wait();
+            } catch (InterruptedException exception) {
+                logger.warning(exception.getMessage());
+            }
+        }
         itemsQueue.add(item);
     }
 
     @Override
-    public boolean isEmpty() {
+    synchronized public boolean isEmpty() {
         return itemsQueue.isEmpty();
+    }
+
+    @Override
+    synchronized public boolean isFull() {
+        return itemsQueue.size() >= capacity;
     }
 
     @Override
@@ -37,7 +52,7 @@ public class Storage<T> implements IStorage<T> {
     }
 
     @Override
-    public int getItemsCount() {
+    synchronized public int getItemsCount() {
         return itemsQueue.size();
     }
 }
