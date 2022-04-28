@@ -4,11 +4,12 @@ import factory.ItemsFactory;
 import factory.items.Item;
 import factory.storages.IStorage;
 
-public class Supplier<T extends Item> implements Runnable {
+public class Supplier<T extends Item> extends DelaysWorker implements Runnable {
     private final ItemsFactory<T> factory;
     private final IStorage<T> storage;
 
     public Supplier(int productionSpeed, ItemsFactory<T> factory, IStorage<T> storage) {
+        super(productionSpeed);
         this.factory = factory;
         this.storage = storage;
     }
@@ -21,5 +22,10 @@ public class Supplier<T extends Item> implements Runnable {
     @Override
     public void run() {
 
+    }
+
+    @Override
+    protected void customTask() {
+        produceAndStore();
     }
 }
