@@ -1,10 +1,11 @@
 package factory.workers;
 
+import common.ValueCommandRecipient;
 import factory.ItemsFactory;
 import factory.items.Item;
 import factory.storages.IStorage;
 
-public class Supplier<T extends Item> extends DelaysWorker implements Runnable {
+public class Supplier<T extends Item> extends DelaysWorker implements Runnable, ValueCommandRecipient {
     private final ItemsFactory<T> factory;
     private final IStorage<T> storage;
 

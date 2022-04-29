@@ -10,7 +10,7 @@ import threadpool.FixedSizeThreadPool;
 import java.util.logging.Logger;
 
 public class Main {
-    static private Logger logger;
+    static private final Logger logger = Logger.getLogger(Main.class.getName());
     public static void main(String[] args) {
         ConfigurationLoader configurationLoader = new ConfigurationLoader("factory-configuration.properties");
         FactoryConfiguration factoryConfiguration;

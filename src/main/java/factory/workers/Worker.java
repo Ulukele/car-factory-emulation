@@ -1,5 +1,6 @@
 package factory.workers;
 
+import common.ValueCommandRecipient;
 import factory.CarsBuilder;
 import factory.items.Accessory;
 import factory.items.Body;
@@ -7,7 +8,7 @@ import factory.items.Car;
 import factory.items.Motor;
 import factory.storages.Storage;
 
-public class Worker extends DelaysWorker implements Runnable {
+public class Worker extends DelaysWorker implements Runnable, ValueCommandRecipient {
     private final CarsBuilder carsBuilder;
     private final Storage<Accessory> accessoryStorage;
     private final Storage<Body> bodyStorage;

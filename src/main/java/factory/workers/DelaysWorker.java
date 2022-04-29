@@ -1,6 +1,8 @@
 package factory.workers;
 
-abstract public class DelaysWorker implements Runnable {
+import common.ValueCommandRecipient;
+
+abstract public class DelaysWorker implements Runnable, ValueCommandRecipient {
     private long waitTime;
 
     public DelaysWorker(long waitTime) {
@@ -25,6 +27,12 @@ abstract public class DelaysWorker implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void execute(long value) {
+        long newValue = waitTime + value;
+        if (newValue >= 0) waitTime = newValue;
     }
 
     abstract protected void customTask();
