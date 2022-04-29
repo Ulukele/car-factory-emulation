@@ -1,27 +1,30 @@
 package factory.workers;
 
 abstract public class DelaysWorker implements Runnable {
-    private double speed;
+    private long waitTime;
 
-    public DelaysWorker(double speed) {
-        this.speed = speed;
+    public DelaysWorker(long waitTime) {
+        this.waitTime = waitTime;
     }
 
-    public double getSpeed() {
-        return speed;
+    public double getWaitTime() {
+        return waitTime;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
-    private double getTimePerTask() {
-        return 1.0 / speed;
+    public void setWaitTime(long waitTime) {
+        this.waitTime = waitTime;
     }
 
     @Override
     public void run() {
-
+        while (true) {
+            customTask();
+            try {
+                Thread.sleep(waitTime);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     abstract protected void customTask();

@@ -15,12 +15,12 @@ public class Worker extends DelaysWorker implements Runnable {
     private final Storage<Car> carStorage;
 
     public Worker(
-            double workSpeed,
+            long waitTime,
             CarsBuilder carsBuilder,
             Storage<Accessory> accessoryStorage,
             Storage<Body> bodyStorage,
             Storage<Motor> motorStorage, Storage<Car> carStorage) {
-        super(workSpeed);
+        super(waitTime);
         this.carsBuilder = carsBuilder;
         this.accessoryStorage = accessoryStorage;
         this.bodyStorage = bodyStorage;
