@@ -1,17 +1,21 @@
 package factory.workers;
 
+import common.ProducerStats;
 import common.ValueCommandRecipient;
 import factory.items.Car;
 import factory.storages.Storage;
 
 import java.util.logging.Logger;
 
-public class Dealer extends DelaysWorker implements Runnable, ValueCommandRecipient {
+public class Dealer extends DelaysWorkerModel
+        implements Runnable, ValueCommandRecipient, Model<ProducerStats> {
 
     private final Logger logger = Logger.getLogger(Dealer.class.getName());
     private final Storage<Car> carStorage;
     private final int idx;
     private final boolean useLogs;
+
+    private int deals = 0;
 
     public Dealer(long waitTime, int idx, boolean useLogs, Storage<Car> carStorage) {
         super(waitTime);
@@ -36,5 +40,11 @@ public class Dealer extends DelaysWorker implements Runnable, ValueCommandRecipi
     @Override
     protected void customTask() {
         requestAndSellCar();
+        deals++;
+    }
+
+    @Override
+    int getProducedCount() {
+        return deals;
     }
 }

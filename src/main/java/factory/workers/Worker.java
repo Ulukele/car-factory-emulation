@@ -1,5 +1,6 @@
 package factory.workers;
 
+import common.ProducerStats;
 import common.ValueCommandRecipient;
 import factory.CarsBuilder;
 import factory.items.Accessory;
@@ -8,12 +9,15 @@ import factory.items.Car;
 import factory.items.Motor;
 import factory.storages.Storage;
 
-public class Worker extends DelaysWorker implements Runnable, ValueCommandRecipient {
+public class Worker extends DelaysWorkerModel
+        implements Runnable, ValueCommandRecipient, Model<ProducerStats> {
     private final CarsBuilder carsBuilder;
     private final Storage<Accessory> accessoryStorage;
     private final Storage<Body> bodyStorage;
     private final Storage<Motor> motorStorage;
     private final Storage<Car> carStorage;
+
+    private int built = 0;
 
     public Worker(
             long waitTime,
@@ -41,5 +45,11 @@ public class Worker extends DelaysWorker implements Runnable, ValueCommandRecipi
     @Override
     protected void customTask() {
         buildAndStore();
+        built++;
+    }
+
+    @Override
+    int getProducedCount() {
+        return built;
     }
 }

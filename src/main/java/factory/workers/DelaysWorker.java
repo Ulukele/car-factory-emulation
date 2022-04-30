@@ -9,7 +9,7 @@ abstract public class DelaysWorker implements Runnable, ValueCommandRecipient {
         this.waitTime = waitTime;
     }
 
-    public double getWaitTime() {
+    public long getWaitTime() {
         return waitTime;
     }
 
