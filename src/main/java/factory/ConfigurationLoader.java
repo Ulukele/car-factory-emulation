@@ -42,6 +42,8 @@ public class ConfigurationLoader {
                     Long.parseLong(properties.getProperty("accessorySupplierWait")),
                     Long.parseLong(properties.getProperty("bodySupplierWait")),
                     Long.parseLong(properties.getProperty("motorSupplierWait")),
+                    Long.parseLong(properties.getProperty("workerWait")),
+                    Long.parseLong(properties.getProperty("dealerWait")),
                     Boolean.parseBoolean(properties.getProperty("logInfo"))
                     );
         } catch (NumberFormatException exception) {

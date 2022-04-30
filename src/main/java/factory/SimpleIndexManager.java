@@ -11,7 +11,7 @@ public class SimpleIndexManager implements IndexManager {
     }
 
     @Override
-    public int getIndex() {
+    synchronized public int getIndex() {
         int value = lastUnused;
         generateNewIndex();
         return value;

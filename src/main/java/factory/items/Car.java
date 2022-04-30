@@ -1,6 +1,5 @@
 package factory.items;
 
-import factory.items.*;
 
 public class Car extends BaseItem implements Item {
     private final Accessory accessory;
@@ -24,5 +23,10 @@ public class Car extends BaseItem implements Item {
 
     public Motor getMotor() {
         return motor;
+    }
+
+    @Override
+    public int getRarity() {
+        return getAccessory().getRarity() * getMotor().getRarity() * getBody().getRarity();
     }
 }

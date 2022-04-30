@@ -11,6 +11,8 @@ public class FactoryConfiguration {
     private final long accessorySupplierWait;
     private final long bodySupplierWait;
     private final long motorSupplierWait;
+    private final long workerWait;
+    private final long dealerWait;
     private final boolean logInfo;
 
     public FactoryConfiguration(
@@ -24,7 +26,7 @@ public class FactoryConfiguration {
             long accessorySupplierWait,
             long bodySupplierWait,
             long motorSupplierWait,
-            boolean logInfo
+            long workerWait, long dealerWait, boolean logInfo
     ) {
         this.storageBodyCapacity = storageBodyCapacity;
         this.storageMotorCapacity = storageMotorCapacity;
@@ -36,6 +38,8 @@ public class FactoryConfiguration {
         this.accessorySupplierWait = accessorySupplierWait;
         this.bodySupplierWait = bodySupplierWait;
         this.motorSupplierWait = motorSupplierWait;
+        this.workerWait = workerWait;
+        this.dealerWait = dealerWait;
         this.logInfo = logInfo;
     }
 
@@ -81,5 +85,13 @@ public class FactoryConfiguration {
 
     public long getMotorSupplierWait() {
         return motorSupplierWait;
+    }
+
+    public long getDealerWait() {
+        return dealerWait;
+    }
+
+    public long getWorkerWait() {
+        return workerWait;
     }
 }

@@ -19,6 +19,13 @@ public class Storage<T> implements IStorage<T> {
 
     @Override
     synchronized public T getItem() {
+        while (isEmpty()) {
+            try {
+                wait();
+            } catch (InterruptedException exception) {
+                logger.warning(exception.getMessage());
+            }
+        }
         T item = itemsQueue.remove();
         notify();
         return item;
@@ -26,7 +33,7 @@ public class Storage<T> implements IStorage<T> {
 
     @Override
     synchronized public void storeItem(T item) {
-        if (isFull()) {
+        while (isFull()) {
             try {
                 wait();
             } catch (InterruptedException exception) {
@@ -34,25 +41,14 @@ public class Storage<T> implements IStorage<T> {
             }
         }
         itemsQueue.add(item);
+        notify();
     }
 
-    @Override
-    synchronized public boolean isEmpty() {
+    private boolean isEmpty() {
         return itemsQueue.isEmpty();
     }
 
-    @Override
-    synchronized public boolean isFull() {
+    private boolean isFull() {
         return itemsQueue.size() >= capacity;
-    }
-
-    @Override
-    public int getCapacity() {
-        return capacity;
-    }
-
-    @Override
-    synchronized public int getItemsCount() {
-        return itemsQueue.size();
     }
 }
