@@ -1,6 +1,7 @@
 package control;
 
 import common.ValueCommandRecipient;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -8,11 +9,12 @@ public class ValueControl {
     private final List<ValueCommandRecipient> recipients;
     private final ValueCommandRecipient recipient;
 
-    public ValueControl(List<ValueCommandRecipient> recipients) {
+    public ValueControl(@NotNull List<ValueCommandRecipient> recipients) {
         this.recipients = recipients;
         this.recipient = null;
     }
-    public ValueControl(ValueCommandRecipient recipient) {
+
+    public ValueControl(@NotNull ValueCommandRecipient recipient) {
         this.recipients = null;
         this.recipient = recipient;
     }

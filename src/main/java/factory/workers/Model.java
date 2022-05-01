@@ -1,5 +1,7 @@
 package factory.workers;
 
-public interface Model<T> {
+import common.IPublisher;
+
+public interface Model<T> extends IPublisher {
     T getData();
 }

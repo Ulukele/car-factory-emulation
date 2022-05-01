@@ -46,6 +46,7 @@ public class Worker extends DelaysWorkerModel
     protected void customTask() {
         buildAndStore();
         built++;
+        publishNotify();
     }
 
     @Override

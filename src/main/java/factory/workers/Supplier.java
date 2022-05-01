@@ -28,6 +28,7 @@ public class Supplier<T extends Item> extends DelaysWorkerModel
     protected void customTask() {
         produceAndStore();
         supplied++;
+        publishNotify();
     }
 
     @Override

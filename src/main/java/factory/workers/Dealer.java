@@ -41,6 +41,7 @@ public class Dealer extends DelaysWorkerModel
     protected void customTask() {
         requestAndSellCar();
         deals++;
+        publishNotify();
     }
 
     @Override
